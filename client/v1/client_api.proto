@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package Vpns.Client.V1;
+package vpns.Client.V1;
 
 import "google/protobuf/timestamp.proto";
 

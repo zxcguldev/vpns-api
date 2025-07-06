@@ -122,8 +122,8 @@ func (OrderType) EnumDescriptor() ([]byte, []int) {
 
 type CreateOrderRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	PaymentType   PaymentType            `protobuf:"varint,1,opt,name=PaymentType,proto3,enum=Vpns.Client.V1.PaymentType" json:"PaymentType,omitempty"`
-	OrderType     OrderType              `protobuf:"varint,2,opt,name=OrderType,proto3,enum=Vpns.Client.V1.OrderType" json:"OrderType,omitempty"`
+	PaymentType   PaymentType            `protobuf:"varint,1,opt,name=PaymentType,proto3,enum=vpns.Client.V1.PaymentType" json:"PaymentType,omitempty"`
+	OrderType     OrderType              `protobuf:"varint,2,opt,name=OrderType,proto3,enum=vpns.Client.V1.OrderType" json:"OrderType,omitempty"`
 	TariffID      int64                  `protobuf:"varint,3,opt,name=TariffID,proto3" json:"TariffID,omitempty"`
 	ClientID      string                 `protobuf:"bytes,4,opt,name=ClientID,proto3" json:"ClientID,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -235,9 +235,9 @@ func (x *CreateOrderResponse) GetOrderID() string {
 type Order struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ID            string                 `protobuf:"bytes,1,opt,name=ID,proto3" json:"ID,omitempty"`
-	OrderType     OrderType              `protobuf:"varint,2,opt,name=OrderType,proto3,enum=Vpns.Client.V1.OrderType" json:"OrderType,omitempty"`
+	OrderType     OrderType              `protobuf:"varint,2,opt,name=OrderType,proto3,enum=vpns.Client.V1.OrderType" json:"OrderType,omitempty"`
 	OrderStatus   string                 `protobuf:"bytes,3,opt,name=OrderStatus,proto3" json:"OrderStatus,omitempty"`
-	PaymentType   PaymentType            `protobuf:"varint,4,opt,name=PaymentType,proto3,enum=Vpns.Client.V1.PaymentType" json:"PaymentType,omitempty"`
+	PaymentType   PaymentType            `protobuf:"varint,4,opt,name=PaymentType,proto3,enum=vpns.Client.V1.PaymentType" json:"PaymentType,omitempty"`
 	ClientID      string                 `protobuf:"bytes,5,opt,name=ClientID,proto3" json:"ClientID,omitempty"`
 	Tariff        *Tariff                `protobuf:"bytes,6,opt,name=Tariff,proto3" json:"Tariff,omitempty"`
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=CreatedAt,proto3" json:"CreatedAt,omitempty"`
@@ -380,21 +380,21 @@ var File_client_v1_client_api_proto protoreflect.FileDescriptor
 
 const file_client_v1_client_api_proto_rawDesc = "" +
 	"\n" +
-	"\x1aclient/v1/client_api.proto\x12\x0eVpns.Client.V1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xc4\x01\n" +
+	"\x1aclient/v1/client_api.proto\x12\x0evpns.Client.V1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xc4\x01\n" +
 	"\x12CreateOrderRequest\x12=\n" +
-	"\vPaymentType\x18\x01 \x01(\x0e2\x1b.Vpns.Client.V1.PaymentTypeR\vPaymentType\x127\n" +
-	"\tOrderType\x18\x02 \x01(\x0e2\x19.Vpns.Client.V1.OrderTypeR\tOrderType\x12\x1a\n" +
+	"\vPaymentType\x18\x01 \x01(\x0e2\x1b.vpns.Client.V1.PaymentTypeR\vPaymentType\x127\n" +
+	"\tOrderType\x18\x02 \x01(\x0e2\x19.vpns.Client.V1.OrderTypeR\tOrderType\x12\x1a\n" +
 	"\bTariffID\x18\x03 \x01(\x03R\bTariffID\x12\x1a\n" +
 	"\bClientID\x18\x04 \x01(\tR\bClientID\"/\n" +
 	"\x13CreateOrderResponse\x12\x18\n" +
 	"\aOrderID\x18\x01 \x01(\tR\aOrderID\"\xf1\x02\n" +
 	"\x05Order\x12\x0e\n" +
 	"\x02ID\x18\x01 \x01(\tR\x02ID\x127\n" +
-	"\tOrderType\x18\x02 \x01(\x0e2\x19.Vpns.Client.V1.OrderTypeR\tOrderType\x12 \n" +
+	"\tOrderType\x18\x02 \x01(\x0e2\x19.vpns.Client.V1.OrderTypeR\tOrderType\x12 \n" +
 	"\vOrderStatus\x18\x03 \x01(\tR\vOrderStatus\x12=\n" +
-	"\vPaymentType\x18\x04 \x01(\x0e2\x1b.Vpns.Client.V1.PaymentTypeR\vPaymentType\x12\x1a\n" +
+	"\vPaymentType\x18\x04 \x01(\x0e2\x1b.vpns.Client.V1.PaymentTypeR\vPaymentType\x12\x1a\n" +
 	"\bClientID\x18\x05 \x01(\tR\bClientID\x12.\n" +
-	"\x06Tariff\x18\x06 \x01(\v2\x16.Vpns.Client.V1.TariffR\x06Tariff\x128\n" +
+	"\x06Tariff\x18\x06 \x01(\v2\x16.vpns.Client.V1.TariffR\x06Tariff\x128\n" +
 	"\tCreatedAt\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tCreatedAt\x128\n" +
 	"\tUpdatedAt\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tUpdatedAt\"$\n" +
 	"\x06Tariff\x12\x1a\n" +
@@ -408,7 +408,7 @@ const file_client_v1_client_api_proto_rawDesc = "" +
 	"\x0fOrderTypeCreate\x10\x01\x12\x14\n" +
 	"\x10OrderTypeRefresh\x10\x022i\n" +
 	"\rClientService\x12X\n" +
-	"\vCreateOrder\x12\".Vpns.Client.V1.CreateOrderRequest\x1a#.Vpns.Client.V1.CreateOrderResponse\"\x00B-Z+github.com/zxcguldev/vpns-api/client;clientb\x06proto3"
+	"\vCreateOrder\x12\".vpns.Client.V1.CreateOrderRequest\x1a#.vpns.Client.V1.CreateOrderResponse\"\x00B-Z+github.com/zxcguldev/vpns-api/client;clientb\x06proto3"
 
 var (
 	file_client_v1_client_api_proto_rawDescOnce sync.Once
@@ -425,24 +425,24 @@ func file_client_v1_client_api_proto_rawDescGZIP() []byte {
 var file_client_v1_client_api_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_client_v1_client_api_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_client_v1_client_api_proto_goTypes = []any{
-	(PaymentType)(0),              // 0: Vpns.Client.V1.PaymentType
-	(OrderType)(0),                // 1: Vpns.Client.V1.OrderType
-	(*CreateOrderRequest)(nil),    // 2: Vpns.Client.V1.CreateOrderRequest
-	(*CreateOrderResponse)(nil),   // 3: Vpns.Client.V1.CreateOrderResponse
-	(*Order)(nil),                 // 4: Vpns.Client.V1.Order
-	(*Tariff)(nil),                // 5: Vpns.Client.V1.Tariff
+	(PaymentType)(0),              // 0: vpns.Client.V1.PaymentType
+	(OrderType)(0),                // 1: vpns.Client.V1.OrderType
+	(*CreateOrderRequest)(nil),    // 2: vpns.Client.V1.CreateOrderRequest
+	(*CreateOrderResponse)(nil),   // 3: vpns.Client.V1.CreateOrderResponse
+	(*Order)(nil),                 // 4: vpns.Client.V1.Order
+	(*Tariff)(nil),                // 5: vpns.Client.V1.Tariff
 	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
 }
 var file_client_v1_client_api_proto_depIdxs = []int32{
-	0, // 0: Vpns.Client.V1.CreateOrderRequest.PaymentType:type_name -> Vpns.Client.V1.PaymentType
-	1, // 1: Vpns.Client.V1.CreateOrderRequest.OrderType:type_name -> Vpns.Client.V1.OrderType
-	1, // 2: Vpns.Client.V1.Order.OrderType:type_name -> Vpns.Client.V1.OrderType
-	0, // 3: Vpns.Client.V1.Order.PaymentType:type_name -> Vpns.Client.V1.PaymentType
-	5, // 4: Vpns.Client.V1.Order.Tariff:type_name -> Vpns.Client.V1.Tariff
-	6, // 5: Vpns.Client.V1.Order.CreatedAt:type_name -> google.protobuf.Timestamp
-	6, // 6: Vpns.Client.V1.Order.UpdatedAt:type_name -> google.protobuf.Timestamp
-	2, // 7: Vpns.Client.V1.ClientService.CreateOrder:input_type -> Vpns.Client.V1.CreateOrderRequest
-	3, // 8: Vpns.Client.V1.ClientService.CreateOrder:output_type -> Vpns.Client.V1.CreateOrderResponse
+	0, // 0: vpns.Client.V1.CreateOrderRequest.PaymentType:type_name -> vpns.Client.V1.PaymentType
+	1, // 1: vpns.Client.V1.CreateOrderRequest.OrderType:type_name -> vpns.Client.V1.OrderType
+	1, // 2: vpns.Client.V1.Order.OrderType:type_name -> vpns.Client.V1.OrderType
+	0, // 3: vpns.Client.V1.Order.PaymentType:type_name -> vpns.Client.V1.PaymentType
+	5, // 4: vpns.Client.V1.Order.Tariff:type_name -> vpns.Client.V1.Tariff
+	6, // 5: vpns.Client.V1.Order.CreatedAt:type_name -> google.protobuf.Timestamp
+	6, // 6: vpns.Client.V1.Order.UpdatedAt:type_name -> google.protobuf.Timestamp
+	2, // 7: vpns.Client.V1.ClientService.CreateOrder:input_type -> vpns.Client.V1.CreateOrderRequest
+	3, // 8: vpns.Client.V1.ClientService.CreateOrder:output_type -> vpns.Client.V1.CreateOrderResponse
 	8, // [8:9] is the sub-list for method output_type
 	7, // [7:8] is the sub-list for method input_type
 	7, // [7:7] is the sub-list for extension type_name

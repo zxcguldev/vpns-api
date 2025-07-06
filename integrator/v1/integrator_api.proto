@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package vpns.Client.V1;
+
+option go_package = "github.com/zxcguldev/vpns-api/integrator;integrator";
+
+service IntegratorService {
+  rpc ProcessPayment(ProcessPaymentRequest) returns (ProcessPaymentResponse);
+}
+
+message ProcessPaymentRequest {
+  string OrderID = 1;
+}
+
+message ProcessPaymentResponse{}

@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ClientService_CreateOrder_FullMethodName = "/Vpns.Client.V1.ClientService/CreateOrder"
+	ClientService_CreateOrder_FullMethodName = "/vpns.Client.V1.ClientService/CreateOrder"
 )
 
 // ClientServiceClient is the client API for ClientService service.
@@ -108,7 +108,7 @@ func _ClientService_CreateOrder_Handler(srv interface{}, ctx context.Context, de
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ClientService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "Vpns.Client.V1.ClientService",
+	ServiceName: "vpns.Client.V1.ClientService",
 	HandlerType: (*ClientServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
