@@ -171,6 +171,7 @@ type CreateOrderRefreshConfigRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TariffID      int64                  `protobuf:"varint,1,opt,name=TariffID,proto3" json:"TariffID,omitempty"`
 	ConfigID      string                 `protobuf:"bytes,2,opt,name=ConfigID,proto3" json:"ConfigID,omitempty"`
+	ClientID      string                 `protobuf:"bytes,3,opt,name=ClientID,proto3" json:"ClientID,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -215,6 +216,13 @@ func (x *CreateOrderRefreshConfigRequest) GetTariffID() int64 {
 func (x *CreateOrderRefreshConfigRequest) GetConfigID() string {
 	if x != nil {
 		return x.ConfigID
+	}
+	return ""
+}
+
+func (x *CreateOrderRefreshConfigRequest) GetClientID() string {
+	if x != nil {
+		return x.ClientID
 	}
 	return ""
 }
@@ -436,10 +444,11 @@ const file_client_v1_client_api_proto_rawDesc = "" +
 	"\bTariffID\x18\x01 \x01(\x03R\bTariffID\x12\x1a\n" +
 	"\bClientID\x18\x02 \x01(\tR\bClientID\"8\n" +
 	"\x1cCreateOrderNewConfigResponse\x12\x18\n" +
-	"\aOrderID\x18\x01 \x01(\tR\aOrderID\"Y\n" +
+	"\aOrderID\x18\x01 \x01(\tR\aOrderID\"u\n" +
 	"\x1fCreateOrderRefreshConfigRequest\x12\x1a\n" +
 	"\bTariffID\x18\x01 \x01(\x03R\bTariffID\x12\x1a\n" +
-	"\bConfigID\x18\x02 \x01(\tR\bConfigID\"<\n" +
+	"\bConfigID\x18\x02 \x01(\tR\bConfigID\x12\x1a\n" +
+	"\bClientID\x18\x03 \x01(\tR\bClientID\"<\n" +
 	" CreateOrderRefreshConfigResponse\x12\x18\n" +
 	"\aOrderID\x18\x01 \x01(\tR\aOrderID\"\x13\n" +
 	"\x11GetTariffsRequest\"R\n" +

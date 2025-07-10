@@ -30,6 +30,7 @@ message CreateOrderNewConfigResponse {
 message CreateOrderRefreshConfigRequest{
   int64 TariffID = 1;
   string ConfigID = 2;
+  string ClientID = 3;
 }
 
 message CreateOrderRefreshConfigResponse{
