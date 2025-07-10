@@ -2,18 +2,10 @@ syntax = "proto3";
 
 package vpns.Client.V1;
 
-import "google/protobuf/timestamp.proto";
-
 option go_package = "github.com/zxcguldev/vpns-api/client;client";
 
 service ClientService {
   rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse) {}
-}
-
-enum PaymentType {
-  PaymentTypeUnspecified = 0;
-  PaymentTypeCrypto = 1;
-  PaymentTypeAifory = 2;
 }
 
 enum OrderType {
@@ -23,25 +15,13 @@ enum OrderType {
 }
 
 message CreateOrderRequest {
-  PaymentType PaymentType = 1;
-  OrderType OrderType = 2;
-  int64 TariffID = 3;
-  string ClientID = 4;
+  OrderType OrderType = 1;
+  int64 TariffID = 2;
+  string ClientID = 3;
 }
 
 message CreateOrderResponse {
   string OrderID = 1;
-}
-
-message Order {
-  string ID = 1;
-  OrderType OrderType = 2;
-  string OrderStatus = 3;
-  PaymentType PaymentType = 4;
-  string ClientID = 5;
-  Tariff Tariff = 6;
-  google.protobuf.Timestamp CreatedAt = 7;
-  google.protobuf.Timestamp UpdatedAt = 8;
 }
 
 message Tariff {
