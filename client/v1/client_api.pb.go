@@ -273,6 +273,7 @@ func (x *CreateOrderRefreshConfigResponse) GetOrderID() string {
 
 type GetTariffsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	CurrencyID    uint32                 `protobuf:"varint,1,opt,name=CurrencyID,proto3" json:"CurrencyID,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -305,6 +306,13 @@ func (x *GetTariffsRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetTariffsRequest.ProtoReflect.Descriptor instead.
 func (*GetTariffsRequest) Descriptor() ([]byte, []int) {
 	return file_client_v1_client_api_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetTariffsRequest) GetCurrencyID() uint32 {
+	if x != nil {
+		return x.CurrencyID
+	}
+	return 0
 }
 
 type GetTariffsResponse struct {
@@ -450,8 +458,11 @@ const file_client_v1_client_api_proto_rawDesc = "" +
 	"\bConfigID\x18\x02 \x01(\tR\bConfigID\x12\x1a\n" +
 	"\bClientID\x18\x03 \x01(\tR\bClientID\"<\n" +
 	" CreateOrderRefreshConfigResponse\x12\x18\n" +
-	"\aOrderID\x18\x01 \x01(\tR\aOrderID\"\x13\n" +
-	"\x11GetTariffsRequest\"R\n" +
+	"\aOrderID\x18\x01 \x01(\tR\aOrderID\"3\n" +
+	"\x11GetTariffsRequest\x12\x1e\n" +
+	"\n" +
+	"CurrencyID\x18\x01 \x01(\rR\n" +
+	"CurrencyID\"R\n" +
 	"\x12GetTariffsResponse\x12<\n" +
 	"\x05Items\x18\x01 \x03(\v2&.vpns.Client.V1.GetTariffsResponseItemR\x05Items\"\xf0\x01\n" +
 	"\x16GetTariffsResponseItem\x12\x0e\n" +

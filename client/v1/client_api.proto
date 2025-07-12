@@ -37,7 +37,9 @@ message CreateOrderRefreshConfigResponse{
   string OrderID = 1;
 }
 
-message GetTariffsRequest {}
+message GetTariffsRequest {
+  uint32 CurrencyID = 1;
+}
 message GetTariffsResponse{
   repeated GetTariffsResponseItem Items = 1;
 }
