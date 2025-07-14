@@ -3,6 +3,7 @@ syntax = "proto3";
 package vpns.Client.V1;
 
 import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/zxcguldev/vpns-api/client;client";
 
@@ -10,6 +11,8 @@ service ClientService {
   rpc CreateOrderNewConfig(CreateOrderNewConfigRequest) returns (CreateOrderNewConfigResponse) {}
   rpc CreateOrderRefreshConfig(CreateOrderRefreshConfigRequest) returns (CreateOrderRefreshConfigResponse) {}
   rpc GetTariffs(GetTariffsRequest) returns (GetTariffsResponse) {}
+  rpc GetOrderDetails(GetOrderDetailsRequest) returns (GetOrderDetailsResponse) {}
+  rpc GetConfig(GetConfigRequest) returns (GetConfigResponse) {}
 }
 
 enum OrderType {
@@ -29,7 +32,7 @@ message CreateOrderNewConfigResponse {
 
 message CreateOrderRefreshConfigRequest{
   int64 TariffID = 1;
-  string ConfigID = 2;
+  repeated string ConfigID = 2;
   string ClientID = 3;
 }
 
@@ -51,4 +54,28 @@ message GetTariffsResponseItem{
   google.protobuf.Duration SubDuration = 4;
   OrderType TariffType = 5;
   int64 ConfigQuantity = 6;
+}
+
+message GetOrderDetailsRequest {
+  string OrderID = 1;
+}
+message GetOrderDetailsResponse {
+  string ID = 1;
+  OrderType OrderType = 2;
+  int64 Status = 3;
+  string ClientID = 4;
+  repeated string ConfigIDs = 5;
+  int64 TariffID = 6;
+  google.protobuf.Timestamp CreatedAt = 7;
+  google.protobuf.Timestamp UpdatedAt = 8;
+}
+
+message GetConfigRequest {
+  string ConfigID = 1;
+}
+message GetConfigResponse {
+  string ID = 1;
+  string ClientID = 2;
+  string URL = 3;
+  google.protobuf.Timestamp ExpireTime = 4;
 }

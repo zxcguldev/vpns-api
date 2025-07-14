@@ -22,6 +22,8 @@ const (
 	ClientService_CreateOrderNewConfig_FullMethodName     = "/vpns.Client.V1.ClientService/CreateOrderNewConfig"
 	ClientService_CreateOrderRefreshConfig_FullMethodName = "/vpns.Client.V1.ClientService/CreateOrderRefreshConfig"
 	ClientService_GetTariffs_FullMethodName               = "/vpns.Client.V1.ClientService/GetTariffs"
+	ClientService_GetOrderDetails_FullMethodName          = "/vpns.Client.V1.ClientService/GetOrderDetails"
+	ClientService_GetConfig_FullMethodName                = "/vpns.Client.V1.ClientService/GetConfig"
 )
 
 // ClientServiceClient is the client API for ClientService service.
@@ -31,6 +33,8 @@ type ClientServiceClient interface {
 	CreateOrderNewConfig(ctx context.Context, in *CreateOrderNewConfigRequest, opts ...grpc.CallOption) (*CreateOrderNewConfigResponse, error)
 	CreateOrderRefreshConfig(ctx context.Context, in *CreateOrderRefreshConfigRequest, opts ...grpc.CallOption) (*CreateOrderRefreshConfigResponse, error)
 	GetTariffs(ctx context.Context, in *GetTariffsRequest, opts ...grpc.CallOption) (*GetTariffsResponse, error)
+	GetOrderDetails(ctx context.Context, in *GetOrderDetailsRequest, opts ...grpc.CallOption) (*GetOrderDetailsResponse, error)
+	GetConfig(ctx context.Context, in *GetConfigRequest, opts ...grpc.CallOption) (*GetConfigResponse, error)
 }
 
 type clientServiceClient struct {
@@ -71,6 +75,26 @@ func (c *clientServiceClient) GetTariffs(ctx context.Context, in *GetTariffsRequ
 	return out, nil
 }
 
+func (c *clientServiceClient) GetOrderDetails(ctx context.Context, in *GetOrderDetailsRequest, opts ...grpc.CallOption) (*GetOrderDetailsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOrderDetailsResponse)
+	err := c.cc.Invoke(ctx, ClientService_GetOrderDetails_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clientServiceClient) GetConfig(ctx context.Context, in *GetConfigRequest, opts ...grpc.CallOption) (*GetConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetConfigResponse)
+	err := c.cc.Invoke(ctx, ClientService_GetConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ClientServiceServer is the server API for ClientService service.
 // All implementations must embed UnimplementedClientServiceServer
 // for forward compatibility.
@@ -78,6 +102,8 @@ type ClientServiceServer interface {
 	CreateOrderNewConfig(context.Context, *CreateOrderNewConfigRequest) (*CreateOrderNewConfigResponse, error)
 	CreateOrderRefreshConfig(context.Context, *CreateOrderRefreshConfigRequest) (*CreateOrderRefreshConfigResponse, error)
 	GetTariffs(context.Context, *GetTariffsRequest) (*GetTariffsResponse, error)
+	GetOrderDetails(context.Context, *GetOrderDetailsRequest) (*GetOrderDetailsResponse, error)
+	GetConfig(context.Context, *GetConfigRequest) (*GetConfigResponse, error)
 	mustEmbedUnimplementedClientServiceServer()
 }
 
@@ -96,6 +122,12 @@ func (UnimplementedClientServiceServer) CreateOrderRefreshConfig(context.Context
 }
 func (UnimplementedClientServiceServer) GetTariffs(context.Context, *GetTariffsRequest) (*GetTariffsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTariffs not implemented")
+}
+func (UnimplementedClientServiceServer) GetOrderDetails(context.Context, *GetOrderDetailsRequest) (*GetOrderDetailsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOrderDetails not implemented")
+}
+func (UnimplementedClientServiceServer) GetConfig(context.Context, *GetConfigRequest) (*GetConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetConfig not implemented")
 }
 func (UnimplementedClientServiceServer) mustEmbedUnimplementedClientServiceServer() {}
 func (UnimplementedClientServiceServer) testEmbeddedByValue()                       {}
@@ -172,6 +204,42 @@ func _ClientService_GetTariffs_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClientService_GetOrderDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOrderDetailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClientServiceServer).GetOrderDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClientService_GetOrderDetails_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClientServiceServer).GetOrderDetails(ctx, req.(*GetOrderDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClientService_GetConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClientServiceServer).GetConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClientService_GetConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClientServiceServer).GetConfig(ctx, req.(*GetConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ClientService_ServiceDesc is the grpc.ServiceDesc for ClientService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -190,6 +258,14 @@ var ClientService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTariffs",
 			Handler:    _ClientService_GetTariffs_Handler,
+		},
+		{
+			MethodName: "GetOrderDetails",
+			Handler:    _ClientService_GetOrderDetails_Handler,
+		},
+		{
+			MethodName: "GetConfig",
+			Handler:    _ClientService_GetConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

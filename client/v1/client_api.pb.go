@@ -10,6 +10,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -170,7 +171,7 @@ func (x *CreateOrderNewConfigResponse) GetOrderID() string {
 type CreateOrderRefreshConfigRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TariffID      int64                  `protobuf:"varint,1,opt,name=TariffID,proto3" json:"TariffID,omitempty"`
-	ConfigID      string                 `protobuf:"bytes,2,opt,name=ConfigID,proto3" json:"ConfigID,omitempty"`
+	ConfigID      []string               `protobuf:"bytes,2,rep,name=ConfigID,proto3" json:"ConfigID,omitempty"`
 	ClientID      string                 `protobuf:"bytes,3,opt,name=ClientID,proto3" json:"ClientID,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -213,11 +214,11 @@ func (x *CreateOrderRefreshConfigRequest) GetTariffID() int64 {
 	return 0
 }
 
-func (x *CreateOrderRefreshConfigRequest) GetConfigID() string {
+func (x *CreateOrderRefreshConfigRequest) GetConfigID() []string {
 	if x != nil {
 		return x.ConfigID
 	}
-	return ""
+	return nil
 }
 
 func (x *CreateOrderRefreshConfigRequest) GetClientID() string {
@@ -443,11 +444,267 @@ func (x *GetTariffsResponseItem) GetConfigQuantity() int64 {
 	return 0
 }
 
+type GetOrderDetailsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OrderID       string                 `protobuf:"bytes,1,opt,name=OrderID,proto3" json:"OrderID,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetOrderDetailsRequest) Reset() {
+	*x = GetOrderDetailsRequest{}
+	mi := &file_client_v1_client_api_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOrderDetailsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOrderDetailsRequest) ProtoMessage() {}
+
+func (x *GetOrderDetailsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_client_v1_client_api_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOrderDetailsRequest.ProtoReflect.Descriptor instead.
+func (*GetOrderDetailsRequest) Descriptor() ([]byte, []int) {
+	return file_client_v1_client_api_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetOrderDetailsRequest) GetOrderID() string {
+	if x != nil {
+		return x.OrderID
+	}
+	return ""
+}
+
+type GetOrderDetailsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ID            string                 `protobuf:"bytes,1,opt,name=ID,proto3" json:"ID,omitempty"`
+	OrderType     OrderType              `protobuf:"varint,2,opt,name=OrderType,proto3,enum=vpns.Client.V1.OrderType" json:"OrderType,omitempty"`
+	Status        int64                  `protobuf:"varint,3,opt,name=Status,proto3" json:"Status,omitempty"`
+	ClientID      string                 `protobuf:"bytes,4,opt,name=ClientID,proto3" json:"ClientID,omitempty"`
+	ConfigIDs     []string               `protobuf:"bytes,5,rep,name=ConfigIDs,proto3" json:"ConfigIDs,omitempty"`
+	TariffID      int64                  `protobuf:"varint,6,opt,name=TariffID,proto3" json:"TariffID,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=CreatedAt,proto3" json:"CreatedAt,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=UpdatedAt,proto3" json:"UpdatedAt,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetOrderDetailsResponse) Reset() {
+	*x = GetOrderDetailsResponse{}
+	mi := &file_client_v1_client_api_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOrderDetailsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOrderDetailsResponse) ProtoMessage() {}
+
+func (x *GetOrderDetailsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_client_v1_client_api_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOrderDetailsResponse.ProtoReflect.Descriptor instead.
+func (*GetOrderDetailsResponse) Descriptor() ([]byte, []int) {
+	return file_client_v1_client_api_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *GetOrderDetailsResponse) GetID() string {
+	if x != nil {
+		return x.ID
+	}
+	return ""
+}
+
+func (x *GetOrderDetailsResponse) GetOrderType() OrderType {
+	if x != nil {
+		return x.OrderType
+	}
+	return OrderType_OrderTypeUnspecified
+}
+
+func (x *GetOrderDetailsResponse) GetStatus() int64 {
+	if x != nil {
+		return x.Status
+	}
+	return 0
+}
+
+func (x *GetOrderDetailsResponse) GetClientID() string {
+	if x != nil {
+		return x.ClientID
+	}
+	return ""
+}
+
+func (x *GetOrderDetailsResponse) GetConfigIDs() []string {
+	if x != nil {
+		return x.ConfigIDs
+	}
+	return nil
+}
+
+func (x *GetOrderDetailsResponse) GetTariffID() int64 {
+	if x != nil {
+		return x.TariffID
+	}
+	return 0
+}
+
+func (x *GetOrderDetailsResponse) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *GetOrderDetailsResponse) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
+type GetConfigRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ConfigID      string                 `protobuf:"bytes,1,opt,name=ConfigID,proto3" json:"ConfigID,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetConfigRequest) Reset() {
+	*x = GetConfigRequest{}
+	mi := &file_client_v1_client_api_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetConfigRequest) ProtoMessage() {}
+
+func (x *GetConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_client_v1_client_api_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetConfigRequest.ProtoReflect.Descriptor instead.
+func (*GetConfigRequest) Descriptor() ([]byte, []int) {
+	return file_client_v1_client_api_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetConfigRequest) GetConfigID() string {
+	if x != nil {
+		return x.ConfigID
+	}
+	return ""
+}
+
+type GetConfigResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ID            string                 `protobuf:"bytes,1,opt,name=ID,proto3" json:"ID,omitempty"`
+	ClientID      string                 `protobuf:"bytes,2,opt,name=ClientID,proto3" json:"ClientID,omitempty"`
+	URL           string                 `protobuf:"bytes,3,opt,name=URL,proto3" json:"URL,omitempty"`
+	ExpireTime    *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=ExpireTime,proto3" json:"ExpireTime,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetConfigResponse) Reset() {
+	*x = GetConfigResponse{}
+	mi := &file_client_v1_client_api_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetConfigResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetConfigResponse) ProtoMessage() {}
+
+func (x *GetConfigResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_client_v1_client_api_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetConfigResponse.ProtoReflect.Descriptor instead.
+func (*GetConfigResponse) Descriptor() ([]byte, []int) {
+	return file_client_v1_client_api_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *GetConfigResponse) GetID() string {
+	if x != nil {
+		return x.ID
+	}
+	return ""
+}
+
+func (x *GetConfigResponse) GetClientID() string {
+	if x != nil {
+		return x.ClientID
+	}
+	return ""
+}
+
+func (x *GetConfigResponse) GetURL() string {
+	if x != nil {
+		return x.URL
+	}
+	return ""
+}
+
+func (x *GetConfigResponse) GetExpireTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ExpireTime
+	}
+	return nil
+}
+
 var File_client_v1_client_api_proto protoreflect.FileDescriptor
 
 const file_client_v1_client_api_proto_rawDesc = "" +
 	"\n" +
-	"\x1aclient/v1/client_api.proto\x12\x0evpns.Client.V1\x1a\x1egoogle/protobuf/duration.proto\"U\n" +
+	"\x1aclient/v1/client_api.proto\x12\x0evpns.Client.V1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"U\n" +
 	"\x1bCreateOrderNewConfigRequest\x12\x1a\n" +
 	"\bTariffID\x18\x01 \x01(\x03R\bTariffID\x12\x1a\n" +
 	"\bClientID\x18\x02 \x01(\tR\bClientID\"8\n" +
@@ -455,7 +712,7 @@ const file_client_v1_client_api_proto_rawDesc = "" +
 	"\aOrderID\x18\x01 \x01(\tR\aOrderID\"u\n" +
 	"\x1fCreateOrderRefreshConfigRequest\x12\x1a\n" +
 	"\bTariffID\x18\x01 \x01(\x03R\bTariffID\x12\x1a\n" +
-	"\bConfigID\x18\x02 \x01(\tR\bConfigID\x12\x1a\n" +
+	"\bConfigID\x18\x02 \x03(\tR\bConfigID\x12\x1a\n" +
 	"\bClientID\x18\x03 \x01(\tR\bClientID\"<\n" +
 	" CreateOrderRefreshConfigResponse\x12\x18\n" +
 	"\aOrderID\x18\x01 \x01(\tR\aOrderID\"3\n" +
@@ -473,16 +730,38 @@ const file_client_v1_client_api_proto_rawDesc = "" +
 	"\n" +
 	"TariffType\x18\x05 \x01(\x0e2\x19.vpns.Client.V1.OrderTypeR\n" +
 	"TariffType\x12&\n" +
-	"\x0eConfigQuantity\x18\x06 \x01(\x03R\x0eConfigQuantity*P\n" +
+	"\x0eConfigQuantity\x18\x06 \x01(\x03R\x0eConfigQuantity\"2\n" +
+	"\x16GetOrderDetailsRequest\x12\x18\n" +
+	"\aOrderID\x18\x01 \x01(\tR\aOrderID\"\xc4\x02\n" +
+	"\x17GetOrderDetailsResponse\x12\x0e\n" +
+	"\x02ID\x18\x01 \x01(\tR\x02ID\x127\n" +
+	"\tOrderType\x18\x02 \x01(\x0e2\x19.vpns.Client.V1.OrderTypeR\tOrderType\x12\x16\n" +
+	"\x06Status\x18\x03 \x01(\x03R\x06Status\x12\x1a\n" +
+	"\bClientID\x18\x04 \x01(\tR\bClientID\x12\x1c\n" +
+	"\tConfigIDs\x18\x05 \x03(\tR\tConfigIDs\x12\x1a\n" +
+	"\bTariffID\x18\x06 \x01(\x03R\bTariffID\x128\n" +
+	"\tCreatedAt\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tCreatedAt\x128\n" +
+	"\tUpdatedAt\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tUpdatedAt\".\n" +
+	"\x10GetConfigRequest\x12\x1a\n" +
+	"\bConfigID\x18\x01 \x01(\tR\bConfigID\"\x8d\x01\n" +
+	"\x11GetConfigResponse\x12\x0e\n" +
+	"\x02ID\x18\x01 \x01(\tR\x02ID\x12\x1a\n" +
+	"\bClientID\x18\x02 \x01(\tR\bClientID\x12\x10\n" +
+	"\x03URL\x18\x03 \x01(\tR\x03URL\x12:\n" +
+	"\n" +
+	"ExpireTime\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
+	"ExpireTime*P\n" +
 	"\tOrderType\x12\x18\n" +
 	"\x14OrderTypeUnspecified\x10\x00\x12\x13\n" +
 	"\x0fOrderTypeCreate\x10\x01\x12\x14\n" +
-	"\x10OrderTypeRefresh\x10\x022\xdc\x02\n" +
+	"\x10OrderTypeRefresh\x10\x022\x96\x04\n" +
 	"\rClientService\x12s\n" +
 	"\x14CreateOrderNewConfig\x12+.vpns.Client.V1.CreateOrderNewConfigRequest\x1a,.vpns.Client.V1.CreateOrderNewConfigResponse\"\x00\x12\x7f\n" +
 	"\x18CreateOrderRefreshConfig\x12/.vpns.Client.V1.CreateOrderRefreshConfigRequest\x1a0.vpns.Client.V1.CreateOrderRefreshConfigResponse\"\x00\x12U\n" +
 	"\n" +
-	"GetTariffs\x12!.vpns.Client.V1.GetTariffsRequest\x1a\".vpns.Client.V1.GetTariffsResponse\"\x00B-Z+github.com/zxcguldev/vpns-api/client;clientb\x06proto3"
+	"GetTariffs\x12!.vpns.Client.V1.GetTariffsRequest\x1a\".vpns.Client.V1.GetTariffsResponse\"\x00\x12d\n" +
+	"\x0fGetOrderDetails\x12&.vpns.Client.V1.GetOrderDetailsRequest\x1a'.vpns.Client.V1.GetOrderDetailsResponse\"\x00\x12R\n" +
+	"\tGetConfig\x12 .vpns.Client.V1.GetConfigRequest\x1a!.vpns.Client.V1.GetConfigResponse\"\x00B-Z+github.com/zxcguldev/vpns-api/client;clientb\x06proto3"
 
 var (
 	file_client_v1_client_api_proto_rawDescOnce sync.Once
@@ -497,7 +776,7 @@ func file_client_v1_client_api_proto_rawDescGZIP() []byte {
 }
 
 var file_client_v1_client_api_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_client_v1_client_api_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_client_v1_client_api_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_client_v1_client_api_proto_goTypes = []any{
 	(OrderType)(0),                           // 0: vpns.Client.V1.OrderType
 	(*CreateOrderNewConfigRequest)(nil),      // 1: vpns.Client.V1.CreateOrderNewConfigRequest
@@ -507,23 +786,36 @@ var file_client_v1_client_api_proto_goTypes = []any{
 	(*GetTariffsRequest)(nil),                // 5: vpns.Client.V1.GetTariffsRequest
 	(*GetTariffsResponse)(nil),               // 6: vpns.Client.V1.GetTariffsResponse
 	(*GetTariffsResponseItem)(nil),           // 7: vpns.Client.V1.GetTariffsResponseItem
-	(*durationpb.Duration)(nil),              // 8: google.protobuf.Duration
+	(*GetOrderDetailsRequest)(nil),           // 8: vpns.Client.V1.GetOrderDetailsRequest
+	(*GetOrderDetailsResponse)(nil),          // 9: vpns.Client.V1.GetOrderDetailsResponse
+	(*GetConfigRequest)(nil),                 // 10: vpns.Client.V1.GetConfigRequest
+	(*GetConfigResponse)(nil),                // 11: vpns.Client.V1.GetConfigResponse
+	(*durationpb.Duration)(nil),              // 12: google.protobuf.Duration
+	(*timestamppb.Timestamp)(nil),            // 13: google.protobuf.Timestamp
 }
 var file_client_v1_client_api_proto_depIdxs = []int32{
-	7, // 0: vpns.Client.V1.GetTariffsResponse.Items:type_name -> vpns.Client.V1.GetTariffsResponseItem
-	8, // 1: vpns.Client.V1.GetTariffsResponseItem.SubDuration:type_name -> google.protobuf.Duration
-	0, // 2: vpns.Client.V1.GetTariffsResponseItem.TariffType:type_name -> vpns.Client.V1.OrderType
-	1, // 3: vpns.Client.V1.ClientService.CreateOrderNewConfig:input_type -> vpns.Client.V1.CreateOrderNewConfigRequest
-	3, // 4: vpns.Client.V1.ClientService.CreateOrderRefreshConfig:input_type -> vpns.Client.V1.CreateOrderRefreshConfigRequest
-	5, // 5: vpns.Client.V1.ClientService.GetTariffs:input_type -> vpns.Client.V1.GetTariffsRequest
-	2, // 6: vpns.Client.V1.ClientService.CreateOrderNewConfig:output_type -> vpns.Client.V1.CreateOrderNewConfigResponse
-	4, // 7: vpns.Client.V1.ClientService.CreateOrderRefreshConfig:output_type -> vpns.Client.V1.CreateOrderRefreshConfigResponse
-	6, // 8: vpns.Client.V1.ClientService.GetTariffs:output_type -> vpns.Client.V1.GetTariffsResponse
-	6, // [6:9] is the sub-list for method output_type
-	3, // [3:6] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	7,  // 0: vpns.Client.V1.GetTariffsResponse.Items:type_name -> vpns.Client.V1.GetTariffsResponseItem
+	12, // 1: vpns.Client.V1.GetTariffsResponseItem.SubDuration:type_name -> google.protobuf.Duration
+	0,  // 2: vpns.Client.V1.GetTariffsResponseItem.TariffType:type_name -> vpns.Client.V1.OrderType
+	0,  // 3: vpns.Client.V1.GetOrderDetailsResponse.OrderType:type_name -> vpns.Client.V1.OrderType
+	13, // 4: vpns.Client.V1.GetOrderDetailsResponse.CreatedAt:type_name -> google.protobuf.Timestamp
+	13, // 5: vpns.Client.V1.GetOrderDetailsResponse.UpdatedAt:type_name -> google.protobuf.Timestamp
+	13, // 6: vpns.Client.V1.GetConfigResponse.ExpireTime:type_name -> google.protobuf.Timestamp
+	1,  // 7: vpns.Client.V1.ClientService.CreateOrderNewConfig:input_type -> vpns.Client.V1.CreateOrderNewConfigRequest
+	3,  // 8: vpns.Client.V1.ClientService.CreateOrderRefreshConfig:input_type -> vpns.Client.V1.CreateOrderRefreshConfigRequest
+	5,  // 9: vpns.Client.V1.ClientService.GetTariffs:input_type -> vpns.Client.V1.GetTariffsRequest
+	8,  // 10: vpns.Client.V1.ClientService.GetOrderDetails:input_type -> vpns.Client.V1.GetOrderDetailsRequest
+	10, // 11: vpns.Client.V1.ClientService.GetConfig:input_type -> vpns.Client.V1.GetConfigRequest
+	2,  // 12: vpns.Client.V1.ClientService.CreateOrderNewConfig:output_type -> vpns.Client.V1.CreateOrderNewConfigResponse
+	4,  // 13: vpns.Client.V1.ClientService.CreateOrderRefreshConfig:output_type -> vpns.Client.V1.CreateOrderRefreshConfigResponse
+	6,  // 14: vpns.Client.V1.ClientService.GetTariffs:output_type -> vpns.Client.V1.GetTariffsResponse
+	9,  // 15: vpns.Client.V1.ClientService.GetOrderDetails:output_type -> vpns.Client.V1.GetOrderDetailsResponse
+	11, // 16: vpns.Client.V1.ClientService.GetConfig:output_type -> vpns.Client.V1.GetConfigResponse
+	12, // [12:17] is the sub-list for method output_type
+	7,  // [7:12] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_client_v1_client_api_proto_init() }
@@ -537,7 +829,7 @@ func file_client_v1_client_api_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_client_v1_client_api_proto_rawDesc), len(file_client_v1_client_api_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   7,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
