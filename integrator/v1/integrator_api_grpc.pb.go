@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	IntegratorService_ProcessPayment_FullMethodName = "/vpns.Client.V1.IntegratorService/ProcessPayment"
+	IntegratorService_CheckBan_FullMethodName       = "/vpns.Client.V1.IntegratorService/CheckBan"
 )
 
 // IntegratorServiceClient is the client API for IntegratorService service.
@@ -27,6 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type IntegratorServiceClient interface {
 	ProcessPayment(ctx context.Context, in *ProcessPaymentRequest, opts ...grpc.CallOption) (*ProcessPaymentResponse, error)
+	CheckBan(ctx context.Context, in *CheckBanRequest, opts ...grpc.CallOption) (*CheckBanResponse, error)
 }
 
 type integratorServiceClient struct {
@@ -47,11 +49,22 @@ func (c *integratorServiceClient) ProcessPayment(ctx context.Context, in *Proces
 	return out, nil
 }
 
+func (c *integratorServiceClient) CheckBan(ctx context.Context, in *CheckBanRequest, opts ...grpc.CallOption) (*CheckBanResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CheckBanResponse)
+	err := c.cc.Invoke(ctx, IntegratorService_CheckBan_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // IntegratorServiceServer is the server API for IntegratorService service.
 // All implementations must embed UnimplementedIntegratorServiceServer
 // for forward compatibility.
 type IntegratorServiceServer interface {
 	ProcessPayment(context.Context, *ProcessPaymentRequest) (*ProcessPaymentResponse, error)
+	CheckBan(context.Context, *CheckBanRequest) (*CheckBanResponse, error)
 	mustEmbedUnimplementedIntegratorServiceServer()
 }
 
@@ -64,6 +77,9 @@ type UnimplementedIntegratorServiceServer struct{}
 
 func (UnimplementedIntegratorServiceServer) ProcessPayment(context.Context, *ProcessPaymentRequest) (*ProcessPaymentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProcessPayment not implemented")
+}
+func (UnimplementedIntegratorServiceServer) CheckBan(context.Context, *CheckBanRequest) (*CheckBanResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckBan not implemented")
 }
 func (UnimplementedIntegratorServiceServer) mustEmbedUnimplementedIntegratorServiceServer() {}
 func (UnimplementedIntegratorServiceServer) testEmbeddedByValue()                           {}
@@ -104,6 +120,24 @@ func _IntegratorService_ProcessPayment_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _IntegratorService_CheckBan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckBanRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntegratorServiceServer).CheckBan(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntegratorService_CheckBan_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntegratorServiceServer).CheckBan(ctx, req.(*CheckBanRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // IntegratorService_ServiceDesc is the grpc.ServiceDesc for IntegratorService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -114,6 +148,10 @@ var IntegratorService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ProcessPayment",
 			Handler:    _IntegratorService_ProcessPayment_Handler,
+		},
+		{
+			MethodName: "CheckBan",
+			Handler:    _IntegratorService_CheckBan_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -5,7 +5,8 @@ package vpns.Client.V1;
 option go_package = "github.com/zxcguldev/vpns-api/integrator;integrator";
 
 service IntegratorService {
-  rpc ProcessPayment(ProcessPaymentRequest) returns (ProcessPaymentResponse);
+  rpc ProcessPayment(ProcessPaymentRequest) returns (ProcessPaymentResponse) {}
+  rpc CheckBan(CheckBanRequest) returns (CheckBanResponse) {}
 }
 
 message ProcessPaymentRequest {
@@ -13,3 +14,10 @@ message ProcessPaymentRequest {
 }
 
 message ProcessPaymentResponse{}
+
+message CheckBanRequest{
+  string ClientID = 1;
+}
+message CheckBanResponse{
+  bool IsBanned = 1;
+}
