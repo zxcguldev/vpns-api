@@ -76,6 +76,7 @@ type CreateOrderNewConfigRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TariffID      int64                  `protobuf:"varint,1,opt,name=TariffID,proto3" json:"TariffID,omitempty"`
 	ClientID      string                 `protobuf:"bytes,2,opt,name=ClientID,proto3" json:"ClientID,omitempty"`
+	OrderID       string                 `protobuf:"bytes,3,opt,name=OrderID,proto3" json:"OrderID,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -120,6 +121,13 @@ func (x *CreateOrderNewConfigRequest) GetTariffID() int64 {
 func (x *CreateOrderNewConfigRequest) GetClientID() string {
 	if x != nil {
 		return x.ClientID
+	}
+	return ""
+}
+
+func (x *CreateOrderNewConfigRequest) GetOrderID() string {
+	if x != nil {
+		return x.OrderID
 	}
 	return ""
 }
@@ -173,6 +181,7 @@ type CreateOrderRefreshConfigRequest struct {
 	TariffID      int64                  `protobuf:"varint,1,opt,name=TariffID,proto3" json:"TariffID,omitempty"`
 	ConfigID      []string               `protobuf:"bytes,2,rep,name=ConfigID,proto3" json:"ConfigID,omitempty"`
 	ClientID      string                 `protobuf:"bytes,3,opt,name=ClientID,proto3" json:"ClientID,omitempty"`
+	OrderID       string                 `protobuf:"bytes,4,opt,name=OrderID,proto3" json:"OrderID,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -224,6 +233,13 @@ func (x *CreateOrderRefreshConfigRequest) GetConfigID() []string {
 func (x *CreateOrderRefreshConfigRequest) GetClientID() string {
 	if x != nil {
 		return x.ClientID
+	}
+	return ""
+}
+
+func (x *CreateOrderRefreshConfigRequest) GetOrderID() string {
+	if x != nil {
+		return x.OrderID
 	}
 	return ""
 }
@@ -704,16 +720,18 @@ var File_client_v1_client_api_proto protoreflect.FileDescriptor
 
 const file_client_v1_client_api_proto_rawDesc = "" +
 	"\n" +
-	"\x1aclient/v1/client_api.proto\x12\x0evpns.Client.V1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"U\n" +
+	"\x1aclient/v1/client_api.proto\x12\x0evpns.Client.V1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"o\n" +
 	"\x1bCreateOrderNewConfigRequest\x12\x1a\n" +
 	"\bTariffID\x18\x01 \x01(\x03R\bTariffID\x12\x1a\n" +
-	"\bClientID\x18\x02 \x01(\tR\bClientID\"8\n" +
+	"\bClientID\x18\x02 \x01(\tR\bClientID\x12\x18\n" +
+	"\aOrderID\x18\x03 \x01(\tR\aOrderID\"8\n" +
 	"\x1cCreateOrderNewConfigResponse\x12\x18\n" +
-	"\aOrderID\x18\x01 \x01(\tR\aOrderID\"u\n" +
+	"\aOrderID\x18\x01 \x01(\tR\aOrderID\"\x8f\x01\n" +
 	"\x1fCreateOrderRefreshConfigRequest\x12\x1a\n" +
 	"\bTariffID\x18\x01 \x01(\x03R\bTariffID\x12\x1a\n" +
 	"\bConfigID\x18\x02 \x03(\tR\bConfigID\x12\x1a\n" +
-	"\bClientID\x18\x03 \x01(\tR\bClientID\"<\n" +
+	"\bClientID\x18\x03 \x01(\tR\bClientID\x12\x18\n" +
+	"\aOrderID\x18\x04 \x01(\tR\aOrderID\"<\n" +
 	" CreateOrderRefreshConfigResponse\x12\x18\n" +
 	"\aOrderID\x18\x01 \x01(\tR\aOrderID\"3\n" +
 	"\x11GetTariffsRequest\x12\x1e\n" +

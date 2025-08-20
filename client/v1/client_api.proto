@@ -24,6 +24,7 @@ enum OrderType {
 message CreateOrderNewConfigRequest {
   int64 TariffID = 1;
   string ClientID = 2;
+  string OrderID = 3;
 }
 
 message CreateOrderNewConfigResponse {
@@ -34,6 +35,7 @@ message CreateOrderRefreshConfigRequest{
   int64 TariffID = 1;
   repeated string ConfigID = 2;
   string ClientID = 3;
+  string OrderID = 4;
 }
 
 message CreateOrderRefreshConfigResponse{
